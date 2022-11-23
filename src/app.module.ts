@@ -7,9 +7,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import config from './config';
 import { enviroments } from './enviroments';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
+    UsersModule,
     LoginModule,
     ConfigModule.forRoot({
       envFilePath: enviroments[process.env.NODE_ENV] || '.env',
@@ -35,6 +37,7 @@ import { enviroments } from './enviroments';
           database: configService.mysql.name,
           username: configService.mysql.user,
           password: configService.mysql.password,
+          synchronize: true,
           autoLoadEntities: true,
           keepConnectionAlive: true,
         };
