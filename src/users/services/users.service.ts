@@ -21,7 +21,7 @@ export class UsersService {
     private userRepository: Repository<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto | CreateAdminDto) {
+  async create(createUserDto: CreateUserDto) {
     const email = createUserDto.email;
     const user = await this.userRepository.findOneBy({
       email: email,
