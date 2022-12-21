@@ -2,14 +2,14 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { UserService } from 'src/user/user.service';
 import config from '../../config';
-import { UsersService } from '../../users/services/users.service';
 import { PayloadToken } from './../models/token.model';
 
 @Injectable()
 export class LoginService {
   constructor(
-    private usersService: UsersService,
+    private usersService: UserService,
     private jwtService: JwtService,
     @Inject(config.KEY)
     private configService: ConfigType<typeof config>,
