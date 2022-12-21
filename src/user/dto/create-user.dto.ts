@@ -1,5 +1,4 @@
-import { IsNotEmpty } from "class-validator";
-import { IsDate, IsEmail, MinLength } from "class-validator/types/decorator/decorators";
+import { IsNotEmpty,IsDate, IsEmail, MinLength  } from "class-validator";
 import { Match } from "src/generics/match.decorator";
 import { Gender } from "../enums/gender.enum";
 
@@ -14,7 +13,9 @@ export class CreateUserDto {
     @IsNotEmpty()
     @IsDate()
     birthDate: Date;
+    @IsNotEmpty()
     city: string;
+    @IsNotEmpty()
     gender: Gender;
     @IsNotEmpty()
     @MinLength(6)
