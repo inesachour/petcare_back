@@ -8,6 +8,7 @@ import * as Joi from 'joi';
 import config from './config';
 import { enviroments } from './enviroments';
 import { UserModule } from './user/user.module';
+import { PetModule } from './pet/pet.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { UserModule } from './user/user.module';
         };
       },
     }),
+    PetModule,
   ],
   controllers: [AppController],
   providers: [AppService],
