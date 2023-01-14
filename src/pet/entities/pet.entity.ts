@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
-import { Gender } from "../../user/enums/gender.enum";
+import { Gender } from '../../user/enums/gender.enum';
 
 @Entity()
 export class Pet {
@@ -18,6 +18,6 @@ export class Pet {
   gender: Gender;
   @Column({ nullable: true })
   weight: number;
-  //@ManyToOne(() => User)
-  //owner: User;
+  @ManyToOne(() => User, (owner: User) => owner.id)
+  owner: User;
 }

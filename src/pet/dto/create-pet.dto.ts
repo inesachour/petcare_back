@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
+import { IsDate, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 import { Gender } from '../../user/enums/gender.enum';
 import { Column } from 'typeorm';
 
@@ -17,4 +17,6 @@ export class CreatePetDto {
   @IsOptional()
   @IsNumber()
   weight: number;
+  @IsNotEmpty()
+  ownerId: number;
 }
