@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from '../../user/entities/user.entity';
 import { Gender } from '../../user/enums/gender.enum';
 
@@ -20,4 +20,8 @@ export class Pet {
   weight: number;
   @ManyToOne(() => User, (owner: User) => owner.id)
   owner: User;
+  @CreateDateColumn()
+  createdAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
