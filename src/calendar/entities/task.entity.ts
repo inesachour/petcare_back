@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 import { TiemstampEntity } from "../../generics/tiemstamp.entity";
 import { User } from "../../user/entities/user.entity";
 import { JoinColumn } from "typeorm";
@@ -14,4 +14,10 @@ export class TaskEntity extends TiemstampEntity  {
   @ManyToOne(type => User)
   @JoinColumn({referencedColumnName:"id"})
   user: User;
+  @Column()
+  title: string
+  @Column()
+  color: string
+  @Column('time')
+  time: Date
 }
