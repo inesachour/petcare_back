@@ -9,6 +9,7 @@ import config from './config';
 import { enviroments } from './enviroments';
 import { UserModule } from './user/user.module';
 import { PetModule } from './pet/pet.module';
+import { CalendarModule } from './calendar/calendar.module';
 
 @Module({
   imports: [
@@ -37,7 +38,7 @@ import { PetModule } from './pet/pet.module';
           port: configService.mysql.port,
           database: configService.mysql.name,
           username: configService.mysql.user,
-          password: configService.mysql.password,
+          password: "password",
           synchronize: true,
           autoLoadEntities: true,
           keepConnectionAlive: true,
@@ -45,6 +46,7 @@ import { PetModule } from './pet/pet.module';
       },
     }),
     PetModule,
+    CalendarModule,
   ],
   controllers: [AppController],
   providers: [AppService],
