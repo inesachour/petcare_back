@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { BadRequestException, NotFoundException } from '@nestjs/common/exceptions';
+import {
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common/exceptions';
 import { InjectRepository } from '@nestjs/typeorm';
 import { createHash } from 'crypto';
 import { Repository } from 'typeorm';
@@ -7,7 +10,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
-
 
 @Injectable()
 export class UserService {
@@ -53,7 +55,7 @@ export class UserService {
   }
 
   async findByEmail(email: string) {
-    return await this.userRepository.findOneOrFail({
+    return await this.userRepository.findOne({
       where: { email },
     });
   }
