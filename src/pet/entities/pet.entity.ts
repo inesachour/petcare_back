@@ -1,4 +1,11 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 import { Gender } from '../../user/enums/gender.enum';
 
@@ -18,7 +25,7 @@ export class Pet {
   gender: Gender;
   @Column({ nullable: true })
   weight: number;
-  @ManyToOne(() => User, (owner: User) => owner.id)
+  @ManyToOne(() => User, (owner: User) => owner.id, { onDelete: 'CASCADE' })
   owner: User;
   @CreateDateColumn()
   createdAt: Date;
