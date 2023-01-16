@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { BadRequestException, NotFoundException } from '@nestjs/common/exceptions';
+import {
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common/exceptions';
 import { InjectRepository } from '@nestjs/typeorm';
 import { createHash } from 'crypto';
 import { Repository } from 'typeorm';
@@ -7,7 +10,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
-
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Injectable()
 export class UserService {
@@ -53,7 +56,7 @@ export class UserService {
   }
 
   async findByEmail(email: string) {
-    return await this.userRepository.findOneOrFail({
+    return await this.userRepository.findOne({
       where: { email },
     });
   }
@@ -115,5 +118,9 @@ export class UserService {
     if (isRefreshTokenMatching) {
       return { id: user.id, role: user.role };
     }
+  }
+
+  async changePassword(user: User, changePasswordDtio: ChangePasswordDto) {
+
   }
 }

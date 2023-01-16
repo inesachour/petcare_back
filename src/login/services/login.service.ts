@@ -38,10 +38,13 @@ export class LoginService {
     const { accessToken } = this.jwtToken(user);
     const refreshToken = this.jwtRefreshToken(user);
     await this.usersService.setCurrentRefreshToken(refreshToken, user.id);
-
+    const id = user.id;
+    const role = user.role;
     return {
       accessToken,
       refreshToken,
+      id,
+      role,
     };
   }
 
