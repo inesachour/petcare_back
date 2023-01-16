@@ -10,6 +10,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Injectable()
 export class UserService {
@@ -117,5 +118,9 @@ export class UserService {
     if (isRefreshTokenMatching) {
       return { id: user.id, role: user.role };
     }
+  }
+
+  async changePassword(user: User, changePasswordDtio: ChangePasswordDto) {
+
   }
 }
