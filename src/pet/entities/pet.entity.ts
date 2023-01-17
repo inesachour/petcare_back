@@ -25,7 +25,7 @@ export class Pet {
   gender: Gender;
   @Column({ nullable: true })
   weight: number;
-  @ManyToOne(() => User, (owner: User) => owner.id, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, (owner: User) => owner.id, { onDelete: 'CASCADE', eager: true })
   owner: User;
   @CreateDateColumn()
   createdAt: Date;
