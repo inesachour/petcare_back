@@ -10,6 +10,8 @@ import { enviroments } from './enviroments';
 import { UserModule } from './user/user.module';
 import { PetModule } from './pet/pet.module';
 import { ServiceProviderModule } from './service_provider/service_provider.module';
+import { CalendarModule } from './calendar/calendar.module';
+import { ItemsModule } from './items/items.module';
 
 @Module({
   imports: [
@@ -38,7 +40,7 @@ import { ServiceProviderModule } from './service_provider/service_provider.modul
           port: configService.mysql.port,
           database: configService.mysql.name,
           username: configService.mysql.user,
-          password: configService.mysql.password,
+          password: "password",
           synchronize: true,
           autoLoadEntities: true,
           keepConnectionAlive: true,
@@ -47,6 +49,8 @@ import { ServiceProviderModule } from './service_provider/service_provider.modul
     }),
     PetModule,
     ServiceProviderModule,
+    CalendarModule,
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
