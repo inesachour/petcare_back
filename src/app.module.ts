@@ -10,6 +10,7 @@ import { enviroments } from './enviroments';
 import { UserModule } from './user/user.module';
 import { PetModule } from './pet/pet.module';
 import { CalendarModule } from './calendar/calendar.module';
+import { ItemsModule } from './items/items.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { CalendarModule } from './calendar/calendar.module';
     }),
     PetModule,
     CalendarModule,
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
