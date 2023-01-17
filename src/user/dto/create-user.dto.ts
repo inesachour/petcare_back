@@ -1,8 +1,11 @@
 import { IsNotEmpty,IsDate, IsEmail, MinLength  } from "class-validator";
 import { Match } from "src/generics/match.decorator";
 import { Gender } from "../enums/gender.enum";
+import { UserRoleEnum } from "../enums/user-role.enum";
 
 export class CreateUserDto {
+    @IsNotEmpty()
+    role: UserRoleEnum;
     @IsNotEmpty()
     firstName: string;
     @IsNotEmpty()

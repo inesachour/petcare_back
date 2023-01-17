@@ -1,6 +1,6 @@
 export enum UserRoleEnum {
-  admin = 'ROLE:ADMIN',
-  petOwner = 'ROLE:PETOWNER',
-  vet = 'ROLE:VET',
-  serviceProvider = 'ROLE:SERVICEPROVIDER',
+    admin = 'admin',
+    provider = 'provider',
+    petOwner = 'petowner',
+    vet = 'vet',
 }

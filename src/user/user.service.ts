@@ -26,7 +26,7 @@ export class UserService {
     });
 
     if (user) {
-      throw new BadRequestException();
+      throw new BadRequestException('Email already exists');
     }
 
     const createdUser = await this.userRepository.create(createUserDto);
