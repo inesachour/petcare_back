@@ -9,11 +9,14 @@ import config from './config';
 import { enviroments } from './enviroments';
 import { UserModule } from './user/user.module';
 import { PetModule } from './pet/pet.module';
+import { ServiceProviderModule } from './service_provider/service_provider.module';
+import { CalendarModule } from './calendar/calendar.module';
 
 @Module({
   imports: [
     UserModule,
     LoginModule,
+    CalendarModule,
     ConfigModule.forRoot({
       envFilePath: enviroments[process.env.NODE_ENV] || '.env',
       load: [config],
@@ -45,6 +48,7 @@ import { PetModule } from './pet/pet.module';
       },
     }),
     PetModule,
+    ServiceProviderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
