@@ -16,7 +16,6 @@ export class ServiceRequestService {
     private userService: UserService,
     @InjectRepository(ServiceRequest)
     private serviceRequestRepository: Repository<ServiceRequest>,
-
   ) {}
 
   async addServiceRequest(createServiceRequestDto: CreateServiceRequestDto) {
@@ -36,5 +35,16 @@ export class ServiceRequestService {
     };
     const merged = Object.assign(createServiceRequestDto, relationObject);
     return this.serviceRequestRepository.save(merged);
+  }
+
+  async getServicesRequestOfProvider(id: number) {
+    return this.serviceRequestRepository.find({
+      where: {
+        provider: {
+          id: id
+        }
+      },
+      relations: ["provider"]
+    });
   }
 }

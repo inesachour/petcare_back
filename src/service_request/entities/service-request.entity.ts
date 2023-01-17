@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
-import { Service } from "../../service_provider/entities/service.entity";
+import { Service } from '../../service_provider/entities/service.entity';
 
 @Entity()
 export class ServiceRequest {
@@ -19,6 +19,8 @@ export class ServiceRequest {
   address: string;
   @Column()
   phone: number;
+  @Column({ default: 'pending' })
+  status: string;
   @Column()
   animalType: string;
   @ManyToOne(() => User, (user: User) => user.id, {
