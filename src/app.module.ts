@@ -41,7 +41,7 @@ import { ServiceRequestModule } from './service_request/service_request.module';
           port: configService.mysql.port,
           database: configService.mysql.name,
           username: configService.mysql.user,
-          password: "password",
+          password: configService.mysql.password,
           synchronize: true,
           autoLoadEntities: true,
           keepConnectionAlive: true,
