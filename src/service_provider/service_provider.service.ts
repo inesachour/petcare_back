@@ -22,6 +22,10 @@ export class ServiceProviderService {
     return await this.serviceRepository.save(merged);
   }
 
+  async findOne(id: number) {
+    return await this.serviceRepository.findOneBy({ id: id });
+  }
+
   async getServices() {
     return await this.serviceRepository.find();
   }
