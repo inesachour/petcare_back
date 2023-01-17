@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { PetService } from './pet.service';
 import { CreatePetDto } from './dto/create-pet.dto';
 
@@ -14,5 +14,10 @@ export class PetController {
   @Patch(':id')
   updatePet(@Param('id') id: number, @Body() createPetDto: CreatePetDto) {
     return this.petService.updatePet(id, createPetDto);
+  }
+
+  @Get(':id')
+  findById(@Param('id') id: number) {
+    return this.petService.findById(id);
   }
 }

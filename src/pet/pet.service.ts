@@ -33,4 +33,8 @@ export class PetService {
     }
     return this.petRepository.save(pet);
   }
+
+  async findById(id: number) {
+    return await this.petRepository.findOneOrFail({ where: { id: id } });
+  }
 }
