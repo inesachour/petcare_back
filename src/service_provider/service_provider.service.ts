@@ -33,6 +33,10 @@ export class ServiceProviderService {
     return this.serviceRepository.save(service);
   }
 
+  async findById(id: number) {
+    return await this.serviceRepository.findOneOrFail({ where: { id: id } });
+  }
+
   async getServices() {
     return await this.serviceRepository.find();
   }

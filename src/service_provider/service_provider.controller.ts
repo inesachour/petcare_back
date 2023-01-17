@@ -30,4 +30,9 @@ export class ServiceProviderController {
   ) {
     return this.serviceProviderService.updateService(id, updateServiceDto);
   }
+
+  @Get(':id')
+  findById(@Param('id') id: number) {
+    return this.serviceProviderService.findById(id);
+  }
 }
