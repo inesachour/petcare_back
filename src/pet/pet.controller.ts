@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { PetService } from './pet.service';
 import { CreatePetDto } from './dto/create-pet.dto';
+import { UpdatePetDto } from './dto/update-pet.dto';
 
 @Controller('pet')
 export class PetController {
@@ -12,8 +13,8 @@ export class PetController {
   }
 
   @Patch(':id')
-  updatePet(@Param('id') id: number, @Body() createPetDto: CreatePetDto) {
-    return this.petService.updatePet(id, createPetDto);
+  updatePet(@Param('id') id: number, @Body() updatePetDto: UpdatePetDto) {
+    return this.petService.updatePet(id, updatePetDto);
   }
 
   @Get(':id')
