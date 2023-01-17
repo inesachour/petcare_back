@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LessThanOrEqual, Repository } from 'typeorm';
 import { Service } from './entities/service.entity';
+import { CreatePetDto } from '../pet/dto/create-pet.dto';
 import { User } from '../user/entities/user.entity';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UserService } from '../user/user.service';
@@ -20,6 +21,10 @@ export class ServiceProviderService {
     const ownerObject = { user: user };
     const merged = Object.assign(createServiceDto, ownerObject);
     return await this.serviceRepository.save(merged);
+  }
+
+  async findOne(id: number) {
+    return await this.serviceRepository.findOneBy({ id: id });
   }
 
   async updateService(id: number, updateServiceDto: UpdateServiceDto) {
