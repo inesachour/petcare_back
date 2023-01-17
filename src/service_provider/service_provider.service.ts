@@ -27,20 +27,33 @@ export class ServiceProviderService {
   }
 
   async searchServices(searchServiceDto: SearchServiceDto) {
+    let services: Service[];
 
-    //TODO CASE WHERE FIELDS EMPTY
-    const services = await this.serviceRepository.find({
-      where: [
-        { price: LessThanOrEqual(searchServiceDto.maxPrice) },
-      ]
-    });
-    //console.log(services);
-    const filtered = [];
+    if (searchServiceDto.maxPrice != null && searchServiceDto.maxPrice >= 0) {
+      services = await this.serviceRepository.find({
+        where: [{ price: LessThanOrEqual(searchServiceDto.maxPrice) }],
+      });
+    } else {
+      services = await this.serviceRepository.find();
+    }
+
+    const categoryFiltered = [];
     services.map((s) => {
-     console.log(searchServiceDto.text);
-      if(searchServiceDto.categories.includes(s.category) && (s.title.includes(searchServiceDto.text) || (s.description.includes(searchServiceDto.text))))
-        filtered.push(s)
+      if (
+        searchServiceDto.categories.includes(s.category) &&
+        (s.title.includes(searchServiceDto.text) ||
+          s.description.includes(searchServiceDto.text))
+      )
+        categoryFiltered.push(s);
     });
-    return filtered
+
+    const filtered = [];
+    categoryFiltered.map((s) => {
+      if (s.title.toLowerCase().includes(searchServiceDto.text.toLowerCase())) {
+        filtered.push(s);
+      }
+    });
+
+    return filtered;
   }
 }
