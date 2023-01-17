@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CreatePetDto } from '../pet/dto/create-pet.dto';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ServiceProviderService } from './service_provider.service';
 import { CreateServiceDto } from './dto/create-service.dto';
-import { SearchServiceDto } from "./dto/search-service.dto";
+import { SearchServiceDto } from './dto/search-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
 
 @Controller('service')
 export class ServiceProviderController {
@@ -19,7 +19,27 @@ export class ServiceProviderController {
   }
 
   @Post('/search')
-  searchServices(@Body() searchServiceDto : SearchServiceDto){
-    return this.serviceProviderService.searchServices(searchServiceDto)
+  searchServices(@Body() searchServiceDto: SearchServiceDto) {
+    return this.serviceProviderService.searchServices(searchServiceDto);
+  }
+
+  @Patch('/:id')
+  updateService(
+    @Param('id') id: number,
+    @Body() updateServiceDto: UpdateServiceDto,
+  ) {
+    return this.serviceProviderService.updateService(id, updateServiceDto);
+  }
+
+  @Get(':id')
+  findById(@Param('id') id: number) {
+    return this.serviceProviderService.findById(id);
+  }
+
+  @Get('/find/:idUser')
+  async getServicesByOwner(@Param('idUser') idUser: number) {
+    let services = [];
+    services = await this.serviceProviderService.getServicesByOwner(idUser);
+    return services;
   }
 }

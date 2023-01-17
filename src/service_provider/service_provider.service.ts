@@ -1,12 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LessThanOrEqual, Like, Repository } from 'typeorm';
+import { LessThanOrEqual, Repository } from 'typeorm';
 import { Service } from './entities/service.entity';
 import { CreatePetDto } from '../pet/dto/create-pet.dto';
 import { User } from '../user/entities/user.entity';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UserService } from '../user/user.service';
 import { SearchServiceDto } from './dto/search-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
 
 @Injectable()
 export class ServiceProviderService {
@@ -20,6 +21,25 @@ export class ServiceProviderService {
     const ownerObject = { user: user };
     const merged = Object.assign(createServiceDto, ownerObject);
     return await this.serviceRepository.save(merged);
+  }
+
+  async findOne(id: number) {
+    return await this.serviceRepository.findOneBy({ id: id });
+  }
+
+  async updateService(id: number, updateServiceDto: UpdateServiceDto) {
+    const service = await this.serviceRepository.preload({
+      id,
+      ...updateServiceDto,
+    });
+    if (!service) {
+      throw new NotFoundException(`Service with id ${id} does not exist`);
+    }
+    return this.serviceRepository.save(service);
+  }
+
+  async findById(id: number) {
+    return await this.serviceRepository.findOneOrFail({ where: { id: id } });
   }
 
   async getServices() {
@@ -55,5 +75,13 @@ export class ServiceProviderService {
     });
 
     return filtered;
+  }
+
+  async getServicesByOwner(id: number) {
+    const services = [];
+    (await this.getServices()).forEach((element) => {
+      if (element.user.id == id) services.push(element);
+    });
+    return services;
   }
 }

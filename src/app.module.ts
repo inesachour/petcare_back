@@ -12,6 +12,7 @@ import { PetModule } from './pet/pet.module';
 import { ServiceProviderModule } from './service_provider/service_provider.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { ItemsModule } from './items/items.module';
+import { ServiceRequestModule } from './service_request/service_request.module';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { ItemsModule } from './items/items.module';
     ServiceProviderModule,
     CalendarModule,
     ItemsModule,
+    ServiceRequestModule,
   ],
   controllers: [AppController],
   providers: [AppService],

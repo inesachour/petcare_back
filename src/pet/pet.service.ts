@@ -1,10 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { Repository } from 'typeorm';
 import { Pet } from './entities/pet.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserService } from '../user/user.service';
 import { User } from '../user/entities/user.entity';
+import { Gender } from '../user/enums/gender.enum';
+import { CreateUserDto } from '../user/dto/create-user.dto';
+import { UpdatePetDto } from './dto/update-pet.dto';
 
 @Injectable()
 export class PetService {
@@ -24,5 +27,19 @@ export class PetService {
     return await this.petRepository.find({
       where: { owner: { id } },
     });
+  }
+  async updatePet(id: number, updatePetDto: UpdatePetDto) {
+    const pet = await this.petRepository.preload({
+      id,
+      ...updatePetDto,
+    });
+    if (!pet) {
+      throw new NotFoundException(`Pet with id ${id} does not exist`);
+    }
+    return this.petRepository.save(pet);
+  }
+
+  async findById(id: number) {
+    return await this.petRepository.findOneOrFail({ where: { id: id } });
   }
 }
