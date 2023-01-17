@@ -47,4 +47,23 @@ export class ServiceRequestService {
       relations: ["provider"]
     });
   }
+
+  async getServicesRequestOfPetOwner(id: number) {
+    return this.serviceRequestRepository.find({
+      where: {
+        petOwner: {
+          id: id
+        }
+      },
+      relations: ["petOwner"]
+    });
+  }
+
+  confirmServiceRequest(id: number){
+    return this.serviceRequestRepository.update(id,{status: "confirmed"})
+  }
+
+  cancelServiceRequest(id: number){
+    return this.serviceRequestRepository.update(id,{status: "canceled"})
+  }
 }
