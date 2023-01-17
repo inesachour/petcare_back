@@ -16,12 +16,14 @@ export class Service {
   @Column()
   category: string;
   @Column()
+  title: string;
+  @Column()
   description: string;
   @Column()
   price: number;
   @Column()
   city: string;
-  @ManyToOne(() => User, (owner: User) => owner.id, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, (owner: User) => owner.id, { onDelete: 'CASCADE', eager: true })
   user: User;
   @CreateDateColumn()
   createdAt: Date;

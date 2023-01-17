@@ -20,4 +20,8 @@ export class ServiceProviderService {
     const merged = Object.assign(createServiceDto, ownerObject);
     return await this.serviceRepository.save(merged);
   }
+
+  async getServices() {
+    return await this.serviceRepository.find();
+  }
 }
