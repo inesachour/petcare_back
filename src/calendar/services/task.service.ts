@@ -4,6 +4,7 @@ import { TaskEntity } from "../entities/task.entity";
 import { Repository } from "typeorm";
 import { CreateTaskDto } from "../dto/create-task.dto";
 import { UpdateTaskDto } from "../dto/update-task.dto";
+import { User } from "../../user/entities/user.entity";
 
 @Injectable()
 export class TaskService {
@@ -11,16 +12,7 @@ export class TaskService {
   constructor(@InjectRepository(TaskEntity) private readonly taskRepository:Repository<TaskEntity>) {  }
 
   async find(user:number) {
-    return await this.taskRepository.find({
-      select: ["id", "date", "content", "user"],
-      relations: ["user"],
-      join: {
-        alias: "task",
-        leftJoinAndSelect: {
-          user: "user.id"
-        }
-      },
-    })
+    return await this.taskRepository.find()
   }
 
   async addTask(task:CreateTaskDto){

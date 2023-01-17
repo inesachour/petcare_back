@@ -1,6 +1,5 @@
-import { IsDate, IsNotEmpty, Length, MinLength } from "class-validator";
+import { IsDate, IsNotEmpty, Length } from "class-validator";
 import { User } from "../../user/entities/user.entity";
-import { Timestamp } from "typeorm";
 
 export class CreateTaskDto {
   @IsNotEmpty()
