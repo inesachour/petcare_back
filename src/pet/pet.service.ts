@@ -23,6 +23,11 @@ export class PetService {
     return await this.petRepository.save(merged);
   }
 
+  async findByOwnerId(id : number) : Promise<Pet[]> {
+    return await this.petRepository.find({
+      where: { owner: { id } },
+    });
+  }
   async updatePet(id: number, updatePetDto: UpdatePetDto) {
     const pet = await this.petRepository.preload({
       id,
