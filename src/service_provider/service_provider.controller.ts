@@ -35,4 +35,11 @@ export class ServiceProviderController {
   findById(@Param('id') id: number) {
     return this.serviceProviderService.findById(id);
   }
+
+  @Get('/find/:idUser')
+  async getServicesByOwner(@Param('idUser') idUser: number) {
+    let services = [];
+    services = await this.serviceProviderService.getServicesByOwner(idUser);
+    return services;
+  }
 }

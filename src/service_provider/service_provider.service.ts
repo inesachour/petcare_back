@@ -71,4 +71,12 @@ export class ServiceProviderService {
 
     return filtered;
   }
+
+  async getServicesByOwner(id: number) {
+    const services = [];
+    (await this.getServices()).forEach((element) => {
+      if (element.user.id == id) services.push(element);
+    });
+    return services;
+  }
 }
