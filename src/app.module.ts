@@ -9,6 +9,9 @@ import config from './config';
 import { enviroments } from './enviroments';
 import { UserModule } from './user/user.module';
 import { PetModule } from './pet/pet.module';
+import { ServiceProviderModule } from "./service_provider/service_provider.module";
+import { ServiceRequestModule } from "./service_request/service_request.module";
+import { CalendarModule } from "./calendar/calendar.module";
 
 @Module({
   imports: [
@@ -45,6 +48,9 @@ import { PetModule } from './pet/pet.module';
       },
     }),
     PetModule,
+    ServiceProviderModule,
+    ServiceRequestModule,
+    CalendarModule
   ],
   controllers: [AppController],
   providers: [AppService],
