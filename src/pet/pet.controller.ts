@@ -23,7 +23,7 @@ export class PetController {
     return this.petService.updatePet(id, updatePetDto);
   }
 
-  @Get(':id')
+  @Get('one/:id')
   findById(@Param('id') id: number) {
     return this.petService.findById(id);
   }
